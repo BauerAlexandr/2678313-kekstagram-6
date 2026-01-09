@@ -1,4 +1,6 @@
-import {HASHTAG_MAX_COUNT, HASHTAG_MAX_LENGTH, COMMENT_MAX_LENGTH, HASHTAGREGEX} from './constants.js';
+import {HASHTAG_MAX_COUNT, HASHTAG_MAX_LENGTH, COMMENT_MAX_LENGTH, HASHTAGREGEX,
+  SCALE_STEP, MIN_SCALE, MAX_SCALE, DEFAULT_SCALE
+} from './constants.js';
 import { sendData } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './util.js';
 
@@ -15,11 +17,6 @@ function initImageForm() {
   const scaleControlBigger = form.querySelector('.scale__control--bigger');
   const scaleControlValue = form.querySelector('.scale__control--value');
   const previewImage = form.querySelector('.img-upload__preview img');
-
-  const SCALE_STEP = 25;
-  const MIN_SCALE = 25;
-  const MAX_SCALE = 100;
-  const DEFAULT_SCALE = 100;
 
   const setScale = (value) => {
     scaleControlValue.value = `${value}%`;
