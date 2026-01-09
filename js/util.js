@@ -64,9 +64,12 @@ const showErrorMessage = () => {
 };
 
 const showLoadErrorMessage = (message) => {
-  const template = document.querySelector('#server-error').content.cloneNode(true);
-  const alertContainer = template.querySelector('.server-error');
-  alertContainer.textContent = message;
+  const template = document.querySelector('#data-error').content.cloneNode(true);
+  const alertContainer = template.querySelector('.data-error');
+  const titleElement = alertContainer.querySelector('.data-error__title');
+  if (titleElement) {
+    titleElement.textContent = message;
+  }
 
   document.body.append(alertContainer);
 
@@ -88,6 +91,7 @@ const uploadPreviewImage = () => {
   const form = document.querySelector('.img-upload__form');
   const fileInput = form.querySelector('.img-upload__input');
   const previewImage = form.querySelector('.img-upload__preview img');
+  const effectsPreviews = form.querySelectorAll('.effects__preview');
 
   fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
@@ -98,7 +102,11 @@ const uploadPreviewImage = () => {
     );
 
     if (matches) {
-      previewImage.src = URL.createObjectURL(file);
+      const imageUrl = URL.createObjectURL(file);
+      previewImage.src = imageUrl;
+      effectsPreviews.forEach((preview) => {
+        preview.style.backgroundImage = `url(${imageUrl})`;
+      });
     }
   });
 };

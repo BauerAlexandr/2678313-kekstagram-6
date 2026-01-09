@@ -64,7 +64,7 @@ function initBigPicture(posts) {
       fragment.appendChild(createCommentElement(c));
     });
     socialCommentsEl.appendChild(fragment);
-    commentCountBlock.innerHTML = `${currentComments} из <span class="comments-count">${totalComments}</span> комментариев`;
+    commentCountBlock.innerHTML = `<span class="social__comment-shown-count">${currentComments}</span> из <span class="social__comment-total-count">${totalComments}</span> комментариев`;
 
     if(currentComments >= totalComments){
       commentsLoader.classList.add('hidden');
@@ -79,7 +79,7 @@ function initBigPicture(posts) {
         nextFragment.appendChild(createCommentElement(c));
       });
       socialCommentsEl.appendChild(nextFragment);
-      commentCountBlock.innerHTML = `${nextCurrentComments} из <span class="comments-count">${totalComments}</span> комментариев`;
+      commentCountBlock.innerHTML = `<span class="social__comment-shown-count">${nextCurrentComments}</span> из <span class="social__comment-total-count">${totalComments}</span> комментариев`;
 
       if(nextCurrentComments >= totalComments){
         commentsLoader.classList.add('hidden');
@@ -110,6 +110,9 @@ function initBigPicture(posts) {
 
   picturesContainer.addEventListener('click', (evt) => {
     const pictureCurrent = evt.target.closest('.picture');
+    if (!pictureCurrent) {
+      return;
+    }
     const postId = Number(pictureCurrent.dataset.postId);
     const post = posts.find((p) => p.id === postId);
     evt.preventDefault();
